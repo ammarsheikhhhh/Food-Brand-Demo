@@ -244,7 +244,7 @@ function buildCustomerOrderEmailText(order) {
     '',
     '— KarachiBites',
     '  Karachi\'s favorite fast food, delivered fast.',
-    '  (This is a portfolio demo — no real food is dispatched.)'
+    '  (Build By KODO - kododevelopers@gmail.com)'
   ].join('\n');
 }
 
