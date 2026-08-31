@@ -1,0 +1,127 @@
+{
+  "categories": [
+    { "id": "burgers", "label": "Burgers" },
+    { "id": "rolls",   "label": "Rolls" },
+    { "id": "family",  "label": "Family Deals" },
+    { "id": "sides",   "label": "Sides & Drinks" }
+  ],
+  "items": [
+    {
+      "id": "zinger-loaded-burger",
+      "name": "Zinger Loaded Burger",
+      "category": "burgers",
+      "price": 650,
+      "description": "Crispy fried chicken, cheese, signature sauce",
+      "image": "assets/food-burger.png",
+      "available": true
+    },
+    {
+      "id": "double-cheese-beef-burger",
+      "name": "Double Cheese Beef Burger",
+      "category": "burgers",
+      "price": 780,
+      "description": "Two beef patties, double cheddar, house sauce",
+      "image": "assets/food-cheese-burger.png",
+      "available": true
+    },
+    {
+      "id": "spicy-peri-peri-burger",
+      "name": "Spicy Peri Peri Burger",
+      "category": "burgers",
+      "price": 620,
+      "description": "Flame-grilled chicken, peri peri mayo, slaw",
+      "image": "assets/food-spicy-burger.png",
+      "available": true
+    },
+    {
+      "id": "classic-chicken-burger",
+      "name": "Classic Chicken Burger",
+      "category": "burgers",
+      "price": 480,
+      "description": "Grilled chicken breast, lettuce, tomato, mayo",
+      "image": "assets/food-classic-burger.png",
+      "available": true
+    },
+    {
+      "id": "signature-beef-roll",
+      "name": "Signature Beef Roll",
+      "category": "rolls",
+      "price": 420,
+      "description": "Slow-cooked beef, mint chutney, paratha wrap",
+      "image": "assets/food-roll.png",
+      "available": true
+    },
+    {
+      "id": "malai-boti-roll",
+      "name": "Malai Boti Roll",
+      "category": "rolls",
+      "price": 380,
+      "description": "Creamy chicken tikka, mint yogurt, paratha",
+      "image": "assets/food-malai-roll.png",
+      "available": true
+    },
+    {
+      "id": "seekh-kebab-roll",
+      "name": "Seekh Kebab Roll",
+      "category": "rolls",
+      "price": 400,
+      "description": "Char-grilled seekh kebab, chutney, onions",
+      "image": "assets/food-seekh-roll.png",
+      "available": true
+    },
+    {
+      "id": "family-feast-combo",
+      "name": "Family Feast Combo",
+      "category": "family",
+      "price": 1799,
+      "description": "4 burgers, 2 fries, 1.5L drink",
+      "image": "assets/food-family-feast.png",
+      "available": true
+    },
+    {
+      "id": "bbq-platter",
+      "name": "BBQ Platter",
+      "category": "family",
+      "price": 1950,
+      "description": "Char-grilled seekh & boti with naan, serves 4",
+      "image": "assets/food-bbq.png",
+      "available": true
+    },
+    {
+      "id": "pizza-rolls-bundle",
+      "name": "Pizza & Rolls Bundle",
+      "category": "family",
+      "price": 1650,
+      "description": "1 large pizza + 2 rolls + 1L drink",
+      "image": "assets/food-pizza-bundle.png",
+      "available": true
+    },
+    {
+      "id": "loaded-cheese-fries",
+      "name": "Loaded Cheese Fries",
+      "category": "sides",
+      "price": 320,
+      "description": "Crinkle-cut fries, cheddar drizzle, jalapeños",
+      "image": "assets/food-fries.png",
+      "available": true
+    },
+    {
+      "id": "chilled-soft-drink-1-5l",
+      "name": "Chilled Soft Drink 1.5L",
+      "category": "sides",
+      "price": 220,
+      "description": "Choice of cola, lemon-lime, or orange",
+      "image": "assets/food-drink.png",
+      "available": true
+    },
+    {
+      "id": "garden-fresh-salad",
+      "name": "Garden Fresh Salad",
+      "category": "sides",
+      "price": 280,
+      "description": "Crisp lettuce, cucumber, tomato, house dressing",
+      "image": "assets/food-salad.png",
+      "available": true
+    }
+  ]
+}

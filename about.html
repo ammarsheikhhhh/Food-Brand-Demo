@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | KarachiBites</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cart side panel -->
+  <div class="cart-panel-overlay" id="cartPanelOverlay"></div>
+  <aside class="cart-panel" id="cartPanel" role="dialog" aria-label="Your cart" aria-hidden="true">
+    <div class="cp-header">
+      <span class="cp-header-title">
+        <img src="assets/icon-cart.png" alt="" class="cp-header-icon">
+        Your Cart
+      </span>
+      <button type="button" class="cp-close" id="cartPanelClose" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cp-scroll" id="cartPanelScroll">
+      <div class="cp-items" id="cartPanelItems"></div>
+
+      <a href="menu.html" class="cp-add-more">
+        <span>&plus;</span> Add more items
+      </a>
+
+      <div class="cp-upsell" id="cartPanelUpsell" style="display:none;">
+        <div class="cp-upsell-header">
+          <span class="cp-upsell-bar"></span>
+          <img class="cp-upsell-fire" src="assets/icon-fire.png" alt="">
+          <span class="cp-upsell-title">Popular with your order</span>
+          <div class="cp-upsell-arrows">
+            <button type="button" class="cp-upsell-arrow prev" id="cpUpsellPrev" aria-label="Scroll left">&lsaquo;</button>
+            <button type="button" class="cp-upsell-arrow next" id="cpUpsellNext" aria-label="Scroll right">&rsaquo;</button>
+          </div>
+        </div>
+        <div class="cp-upsell-track" id="cartPanelUpsellTrack"></div>
+      </div>
+    </div>
+
+    <div class="cp-footer">
+      <div class="cp-summary" id="cartPanelSummary"></div>
+      <a href="checkout.html" class="cp-checkout-btn">
+        checkout <span>&rarr;</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Floating "added to cart" bar -->
+  <div class="cart-float-bar" id="cartFloatBar" role="button" tabindex="0" aria-label="View cart">
+    <span class="cfb-shine"></span>
+    <span class="cfb-count">0</span>
+    <span class="cfb-label">View Cart</span>
+    <span class="cfb-price">Rs. 0</span>
+    <span class="cfb-arrow">&rarr;</span>
+  </div>
+
+  <header class="navbar">
+    <div class="navbar-bunting"></div>
+    <div class="topbar-inner">
+
+      <!-- LEFT: Location selector + Contact us -->
+      <div class="navbar-left">
+        <div class="location-wrap">
+          <button class="location-btn" id="locationBtn" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/icon-location.png" alt="" class="location-icon">
+            <span class="location-text">
+              <strong>Change Location</strong>
+              <span class="location-sub">Karachi</span>
+            </span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="location-dropdown" id="locationDropdown">
+            <button class="location-option" data-location="Clifton">Clifton</button>
+            <button class="location-option" data-location="DHA Phase 5">DHA Phase 5</button>
+            <button class="location-option" data-location="Gulshan-e-Iqbal">Gulshan-e-Iqbal</button>
+            <button class="location-option" data-location="North Nazimabad">North Nazimabad</button>
+            <button class="location-option" data-location="Saddar">Saddar</button>
+          </div>
+        </div>
+
+        <span class="navbar-divider"></span>
+
+        <div class="contact-us">
+          <span class="contact-icon-wrap"><img src="assets/icon-phone.png" alt="" class="contact-icon"></span>
+          <span class="contact-text">
+            <strong>Contact us</strong>
+            <span class="contact-sub">0334-3745379</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- CENTER: Logo -->
+      <a href="index.html" class="nav-logo"><img src="assets/evora-logo.png" alt="Evora" class="nav-logo-img"></a>
+
+      <!-- RIGHT: Complaint, Cart, Options -->
+      <div class="topbar-actions">
+        <a href="contact.html" class="complaint-pill">
+          <span class="complaint-text">
+            <strong>Submit Complaint</strong>
+            <span class="complaint-sub">We'll make it right</span>
+          </span>
+          <span class="complaint-icon-wrap"><img src="assets/icon-complaint.png" alt="" class="complaint-icon"></span>
+        </a>
+
+        <span class="navbar-divider"></span>
+
+        <div class="cart-wrap">
+          <button class="icon-btn cart-btn" id="cartBtn" aria-label="View cart" aria-haspopup="dialog">
+            <img src="assets/icon-cart.png" alt="" class="icon-btn-img">
+            <span class="badge">0</span>
+          </button>
+        </div>
+
+        <div class="options-wrap">
+          <button class="icon-btn options-btn" id="optionsBtn" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/icon-menu.png" alt="" class="icon-btn-img">
+          </button>
+          <div class="options-dropdown" id="optionsDropdown">
+            <a href="index.html" class="options-link">Home</a>
+            <a href="menu.html" class="options-link">Menu</a>
+            <a href="about.html" class="options-link">About</a>
+            <a href="contact.html" class="options-link">Contact</a>
+            <a href="about.html#blog" class="options-link">Blogs</a>
+            <a href="about.html#history" class="options-link">Our History</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <section class="page-banner">
+    <span class="eyebrow-center">Our Story</span>
+    <h1>Made Fresh, Served Fast</h1>
+    <p>From a single street stall to a Karachi-wide favorite — here's the story behind the buns.</p>
+  </section>
+
+  <section>
+    <div class="section-inner about-grid">
+      <div class="about-visual">
+        <img class="about-emoji" src="assets/icon-chef.png" alt="Chef">
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow">Who We Are</span>
+        <h2 class="section-title" style="text-align:left; margin-bottom:20px;">Karachi's flavor, done right</h2>
+        <p class="about-desc">Since day one, we've been grilling, frying, and rolling up Karachi's favorite street food classics with a modern twist — using fresh ingredients and recipes perfected over the years. Every order is made to order, never sitting under a heat lamp waiting for you.</p>
+        <a href="menu.html" class="btn btn-outline">See Our Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <span class="eyebrow-center">What We Stand For</span>
+      <h2 class="section-title">Our Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <img class="v-emoji" src="assets/icon-fresh.png" alt="Fresh Ingredients">
+          <h4>Fresh Ingredients</h4>
+          <p>Sourced daily and prepped in-house — nothing frozen, nothing pre-made.</p>
+        </div>
+        <div class="value-card">
+          <img class="v-emoji" src="assets/icon-fast.png" alt="Fast Service">
+          <h4>Fast Service</h4>
+          <p>Hot food on your table in 30 minutes or less, every single time.</p>
+        </div>
+        <div class="value-card">
+          <img class="v-emoji" src="assets/icon-local.png" alt="Local Flavor">
+          <h4>Local Flavor</h4>
+          <p>Karachi's own spice blends and recipes, built for the local palate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="history">
+    <div class="section-inner">
+      <span class="eyebrow-center">Our History</span>
+      <h2 class="section-title">From Street Stall to Citywide Favorite</h2>
+      <div class="timeline">
+        <div class="timeline-item" data-step="1">
+          <span class="yr">2018</span>
+          <h4>A Small Stall in Saddar</h4>
+          <p>KarachiBites started as a single grill cart, serving rolls and burgers to the after-work crowd.</p>
+        </div>
+        <div class="timeline-item" data-step="2">
+          <span class="yr">2020</span>
+          <h4>First Sit-Down Branch</h4>
+          <p>Demand grew fast enough to open our first proper outlet, complete with a full kitchen and dine-in seating.</p>
+        </div>
+        <div class="timeline-item" data-step="3">
+          <span class="yr">2022</span>
+          <h4>Online Ordering Launches</h4>
+          <p>We brought the menu online so all of Karachi could order delivery straight to their door.</p>
+        </div>
+        <div class="timeline-item" data-step="4">
+          <span class="yr">2024</span>
+          <h4>15+ Branches Citywide</h4>
+          <p>From Clifton to North Nazimabad, KarachiBites became a fixture in neighborhoods across the city.</p>
+        </div>
+        <div class="timeline-item" data-step="5">
+          <span class="yr">Today</span>
+          <h4>Still Grilling, Still Local</h4>
+          <p>Same fresh ingredients, same bold flavor — now with a menu that keeps growing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="blog">
+    <div class="section-inner">
+      <span class="eyebrow-center">From The Kitchen</span>
+      <h2 class="section-title">Latest Bites &amp; Stories</h2>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-thumb"><img src="assets/blog-midnight.png" alt=""></div>
+          <div class="blog-body">
+            <h4>What Makes a Great Midnight Deal</h4>
+            <p>How we design our late-night menu for the post-11PM crowd.</p>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-thumb"><img src="assets/blog-spice.png" alt=""></div>
+          <div class="blog-body">
+            <h4>Behind Our Signature Spice Blend</h4>
+            <p>A look at the recipe that's been tweaked (and guarded) since 2018.</p>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-thumb"><img src="assets/blog-delivery.png" alt=""></div>
+          <div class="blog-body">
+            <h4>How We Keep Delivery Under 30 Minutes</h4>
+            <p>A peek into our kitchen-to-door logistics across Karachi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <span class="nav-logo"><img src="assets/evora-logo.png" alt="Evora" class="footer-logo-img"></span>
+        <p class="footer-tagline">Karachi's favorite fast food, delivered fast.</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Quick Links</h4>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="menu.html" class="footer-link">Menu</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div>
+       <h4 class="footer-heading">Get In Touch</h4>
+        <p class="footer-contact-line"><img src="assets/icon-location.png" alt="">Multiple branches across Karachi</p>
+        <p class="footer-contact-line"><img src="assets/icon-phone.png" alt="">0334-3745379</p>
+        <p class="footer-contact-line"><img src="assets/icon-email.png" alt="">kododevelopers@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 KarachiBites Demo. Built by KODO.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

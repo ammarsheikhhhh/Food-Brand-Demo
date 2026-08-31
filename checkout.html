@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout | KarachiBites</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cart side panel -->
+  <div class="cart-panel-overlay" id="cartPanelOverlay"></div>
+  <aside class="cart-panel" id="cartPanel" role="dialog" aria-label="Your cart" aria-hidden="true">
+    <div class="cp-header">
+      <span class="cp-header-title">
+        <img src="assets/icon-cart.png" alt="" class="cp-header-icon">
+        Your Cart
+      </span>
+      <button type="button" class="cp-close" id="cartPanelClose" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cp-scroll" id="cartPanelScroll">
+      <div class="cp-items" id="cartPanelItems"></div>
+
+      <a href="menu.html" class="cp-add-more">
+        <span>&plus;</span> Add more items
+      </a>
+
+      <div class="cp-upsell" id="cartPanelUpsell" style="display:none;">
+        <div class="cp-upsell-header">
+          <span class="cp-upsell-bar"></span>
+          <img class="cp-upsell-fire" src="assets/icon-fire.png" alt="">
+          <span class="cp-upsell-title">Popular with your order</span>
+          <div class="cp-upsell-arrows">
+            <button type="button" class="cp-upsell-arrow prev" id="cpUpsellPrev" aria-label="Scroll left">&lsaquo;</button>
+            <button type="button" class="cp-upsell-arrow next" id="cpUpsellNext" aria-label="Scroll right">&rsaquo;</button>
+          </div>
+        </div>
+        <div class="cp-upsell-track" id="cartPanelUpsellTrack"></div>
+      </div>
+    </div>
+
+    <div class="cp-footer">
+      <div class="cp-summary" id="cartPanelSummary"></div>
+      <a href="checkout.html" class="cp-checkout-btn">
+        checkout <span>&rarr;</span>
+      </a>
+    </div>
+  </aside>
+
+  <header class="navbar">
+    <div class="navbar-bunting"></div>
+    <div class="topbar-inner">
+
+      <!-- LEFT: Location selector + Contact us -->
+      <div class="navbar-left">
+        <div class="location-wrap">
+          <button class="location-btn" id="locationBtn" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/icon-location.png" alt="" class="location-icon">
+            <span class="location-text">
+              <strong>Change Location</strong>
+              <span class="location-sub">Karachi</span>
+            </span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="location-dropdown" id="locationDropdown">
+            <button class="location-option" data-location="Clifton">Clifton</button>
+            <button class="location-option" data-location="DHA Phase 5">DHA Phase 5</button>
+            <button class="location-option" data-location="Gulshan-e-Iqbal">Gulshan-e-Iqbal</button>
+            <button class="location-option" data-location="North Nazimabad">North Nazimabad</button>
+            <button class="location-option" data-location="Saddar">Saddar</button>
+          </div>
+        </div>
+
+        <span class="navbar-divider"></span>
+
+        <div class="contact-us">
+          <span class="contact-icon-wrap"><img src="assets/icon-phone.png" alt="" class="contact-icon"></span>
+          <span class="contact-text">
+            <strong>Contact us</strong>
+            <span class="contact-sub">0334-3745379</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- CENTER: Logo -->
+      <a href="index.html" class="nav-logo"><img src="assets/evora-logo.png" alt="Evora" class="nav-logo-img"></a>
+
+      <!-- RIGHT: Complaint, Cart, Options -->
+      <div class="topbar-actions">
+        <a href="contact.html" class="complaint-pill">
+          <span class="complaint-text">
+            <strong>Submit Complaint</strong>
+            <span class="complaint-sub">We'll make it right</span>
+          </span>
+          <span class="complaint-icon-wrap"><img src="assets/icon-complaint.png" alt="" class="complaint-icon"></span>
+        </a>
+
+        <span class="navbar-divider"></span>
+
+        <div class="cart-wrap">
+          <button class="icon-btn cart-btn" id="cartBtn" aria-label="View cart" aria-haspopup="dialog">
+            <img src="assets/icon-cart.png" alt="" class="icon-btn-img">
+            <span class="badge">0</span>
+          </button>
+        </div>
+
+        <div class="options-wrap">
+          <button class="icon-btn options-btn" id="optionsBtn" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/icon-menu.png" alt="" class="icon-btn-img">
+          </button>
+          <div class="options-dropdown" id="optionsDropdown">
+            <a href="index.html" class="options-link">Home</a>
+            <a href="menu.html" class="options-link">Menu</a>
+            <a href="about.html" class="options-link">About</a>
+            <a href="contact.html" class="options-link">Contact</a>
+            <a href="about.html#blog" class="options-link">Blogs</a>
+            <a href="about.html#history" class="options-link">Our History</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <section class="page-banner">
+    <span class="eyebrow-center">Almost There</span>
+    <h1>Checkout</h1>
+    <p>Review your order, add your delivery details, and choose how you'd like to pay.</p>
+  </section>
+
+  <section>
+    <div class="section-inner">
+
+      <!-- Empty cart state -->
+      <div class="checkout-empty" id="checkoutEmpty" style="display:none;">
+        <img class="ce-icon" src="assets/icon-cart.png" alt="">
+        <h3>Your cart is empty</h3>
+        <p>Add something delicious from the menu before checking out.</p>
+        <a href="menu.html" class="btn btn-primary">Browse Menu</a>
+      </div>
+
+      <!-- Order confirmed state -->
+      <div class="checkout-success" id="checkoutSuccess" style="display:none;">
+        <img class="cs-icon" src="assets/icon-success.png" alt="">
+        <h3>Order Placed!</h3>
+        <p id="successMessage">Thanks — your order has been received and is being prepared.</p>
+        <a href="index.html" class="btn btn-primary">Back to Home</a>
+      </div>
+
+      <!-- Main checkout content -->
+      <div class="checkout-content" id="checkoutContent" style="display:none;">
+
+        <form id="checkoutForm">
+          <div class="form-card">
+            <h3>Delivery Details</h3>
+            <p>Where should we bring your order?</p>
+
+            <div class="field">
+              <label for="co-name">Full Name</label>
+              <input type="text" id="co-name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="co-email">Email Address</label>
+              <input type="email" id="co-email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="field">
+              <label for="co-phone">Phone Number</label>
+              <input type="tel" id="co-phone" name="phone" placeholder="03XX-XXXXXXX" required>
+            </div>
+            <div class="field">
+              <label for="co-address">Delivery Address</label>
+              <textarea id="co-address" name="address" placeholder="House / street, area, landmark..." required></textarea>
+            </div>
+            <div class="field">
+              <label for="co-area">Area</label>
+              <select id="co-area" name="area">
+                <option value="Clifton">Clifton</option>
+                <option value="DHA Phase 5">DHA Phase 5</option>
+                <option value="Gulshan-e-Iqbal">Gulshan-e-Iqbal</option>
+                <option value="North Nazimabad">North Nazimabad</option>
+                <option value="Saddar">Saddar</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-card payment-card">
+            <h3>Payment Method</h3>
+            <p>Choose how you'd like to pay for your order.</p>
+
+            <div class="payment-options" id="paymentOptions">
+              <label class="payment-option">
+                <input type="radio" name="payment" value="cod" checked>
+                <img class="po-icon" src="assets/icon-cod.png" alt="">
+                <span class="po-body">
+                  <strong>Cash on Delivery</strong>
+                  <small>Pay in cash when your order arrives</small>
+                </span>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="payment" value="card">
+                <img class="po-icon" src="assets/icon-card.png" alt="">
+                <span class="po-body">
+                  <strong>Credit / Debit Card</strong>
+                  <small>Pay online via bank card</small>
+                </span>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="payment" value="jazzcash">
+                <img class="po-icon" src="assets/icon-jazzcash.png" alt="">
+                <span class="po-body">
+                  <strong>JazzCash</strong>
+                  <small>Pay with your JazzCash wallet</small>
+                </span>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="payment" value="easypaisa">
+                <img class="po-icon" src="assets/icon-easypaisa.png" alt="">
+                <span class="po-body">
+                  <strong>EasyPaisa</strong>
+                  <small>Pay with your EasyPaisa wallet</small>
+                </span>
+              </label>
+            </div>
+
+            <div class="payment-detail" id="cardDetail" style="display:none;">
+              <div class="field">
+                <label for="co-card-number">Card Number</label>
+                <input type="text" id="co-card-number" name="cardNumber" placeholder="1234 5678 9012 3456" inputmode="numeric" maxlength="19">
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="co-card-expiry">Expiry</label>
+                  <input type="text" id="co-card-expiry" name="cardExpiry" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="field">
+                  <label for="co-card-cvv">CVV</label>
+                  <input type="text" id="co-card-cvv" name="cardCvv" placeholder="123" inputmode="numeric" maxlength="4">
+                </div>
+              </div>
+            </div>
+
+            <div class="payment-detail" id="walletDetail" style="display:none;">
+              <div class="field">
+                <label for="co-wallet-number" id="walletLabel">Mobile Number</label>
+                <input type="tel" id="co-wallet-number" name="walletNumber" placeholder="03XX-XXXXXXX">
+              </div>
+              <p class="wallet-note" id="walletNote">You'll get a payment prompt on this number to confirm.</p>
+            </div>
+
+            <p class="demo-note">This is a portfolio demo — no real payment is processed.</p>
+          </div>
+        </form>
+
+        <aside class="order-summary">
+          <h3>Order Summary</h3>
+          <div class="order-items" id="orderItems"></div>
+
+          <div class="order-line">
+            <span>Subtotal</span>
+            <span id="ordSubtotal">Rs. 0</span>
+          </div>
+          <div class="order-line">
+            <span>GST (18%)</span>
+            <span id="ordGst">Rs. 0</span>
+          </div>
+          <div class="order-line">
+            <span>Delivery Charge</span>
+            <span id="ordDelivery">Rs. 0</span>
+          </div>
+          <div class="order-line order-total">
+            <span>Total</span>
+            <span id="ordTotal">Rs. 0</span>
+          </div>
+
+          <!-- Shown if the order fails to reach the server (network/API error) -->
+          <p class="checkout-error" id="checkoutError" style="display:none;"></p>
+
+          <button type="submit" form="checkoutForm" class="btn btn-primary btn-block" id="placeOrderBtn">Place Order</button>
+        </aside>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <span class="nav-logo"><img src="assets/evora-logo.png" alt="Evora" class="footer-logo-img"></span>
+        <p class="footer-tagline">Karachi's favorite fast food, delivered fast.</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Quick Links</h4>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="menu.html" class="footer-link">Menu</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div>
+       <h4 class="footer-heading">Get In Touch</h4>
+        <p class="footer-contact-line"><img src="assets/icon-location.png" alt="">Multiple branches across Karachi</p>
+        <p class="footer-contact-line"><img src="assets/icon-phone.png" alt="">0334-3745379</p>
+        <p class="footer-contact-line"><img src="assets/icon-email.png" alt="">kododevelopers@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 KarachiBites Demo. Built by KODO.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

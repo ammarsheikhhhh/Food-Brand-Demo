@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard | Evora</title>
+  <style>
+    /* ---------- Reset & base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #f5f6f8;
+      color: #1f2937;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    a { color: #e4002b; }
+
+    /* ---------- Layout ---------- */
+    .topbar {
+      background: #1f2937;
+      color: #fff;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .topbar h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .topbar h1 .accent { color: #ff5470; }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+    }
+    .topbar-right .pill {
+      background: rgba(255,255,255,0.1);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* ---------- Login gate ---------- */
+    .gate {
+      max-width: 420px;
+      margin: 60px auto;
+      background: #fff;
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .gate h2 { margin-top: 0; font-size: 20px; }
+    .gate p { color: #6b7280; margin: 6px 0 18px; }
+    .gate input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .gate input:focus { outline: 2px solid #e4002b; border-color: #e4002b; }
+    .gate button {
+      margin-top: 14px;
+      width: 100%;
+      padding: 10px 12px;
+      background: #e4002b;
+      color: #fff;
+      border: 0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .gate button:hover { background: #c70025; }
+    .gate .err { color: #b91c1c; margin-top: 10px; font-size: 13px; }
+    .gate .help { color: #6b7280; margin-top: 16px; font-size: 12px; line-height: 1.5; }
+
+    /* ---------- Stats cards ---------- */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .stat {
+      background: #fff;
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .stat .label { color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat .value { font-size: 24px; font-weight: 700; margin-top: 4px; color: #1f2937; }
+    .stat .sub { color: #6b7280; font-size: 12px; margin-top: 4px; }
+    .stat.revenue .value { color: #e4002b; }
+
+    /* ---------- Tabs ---------- */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 16px;
+    }
+    .tab {
+      background: transparent;
+      border: 0;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #6b7280;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    .tab.active { color: #e4002b; border-bottom-color: #e4002b; font-weight: 600; }
+    .tab .badge {
+      background: #fee2e2;
+      color: #b91c1c;
+      border-radius: 999px;
+      padding: 1px 8px;
+      font-size: 11px;
+      margin-left: 6px;
+    }
+
+    /* ---------- Toolbar ---------- */
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .toolbar select, .toolbar input {
+      padding: 8px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 13px;
+      background: #fff;
+    }
+    .toolbar button {
+      padding: 8px 14px;
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .toolbar button:hover { background: #f3f4f6; }
+
+    /* ---------- Table ---------- */
+    .table-wrap {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 12px 14px; font-size: 13px; vertical-align: top; }
+    thead { background: #f9fafb; }
+    th { font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb; }
+    tbody tr { border-bottom: 1px solid #f1f2f4; }
+    tbody tr:hover { background: #fafbfc; }
+    tbody tr.expanded { background: #fff8f9; }
+
+    .order-id { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #1f2937; font-weight: 600; }
+    .customer-name { font-weight: 600; }
+    .customer-meta { color: #6b7280; font-size: 12px; }
+    .items-cell { max-width: 280px; }
+    .item-line { display: block; }
+    .total { font-weight: 600; color: #1f2937; }
+
+    /* Status pills */
+    .status {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .status-received       { background: #dbeafe; color: #1e40af; }
+    .status-preparing      { background: #fef3c7; color: #92400e; }
+    .status-out_for_delivery { background: #ede9fe; color: #5b21b6; }
+    .status-delivered      { background: #d1fae5; color: #065f46; }
+    .status-cancelled      { background: #fee2e2; color: #991b1b; }
+
+    /* Status select dropdown inside a row */
+    .row-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    .row-actions select {
+      padding: 5px 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 12px;
+      background: #fff;
+    }
+    .row-actions button {
+      padding: 5px 10px;
+      background: #e4002b;
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .row-actions button:disabled { background: #9ca3af; cursor: not-allowed; }
+    .row-actions button:hover:not(:disabled) { background: #c70025; }
+
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6b7280;
+    }
+
+    /* ---------- Toast ---------- */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      background: #1f2937;
+      color: #fff;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { background: #b91c1c; }
+    .toast.success { background: #047857; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <h1><img src="assets/evora-logo.png" alt="Evora" style="height:22px; vertical-align:middle; margin-right:8px; filter:brightness(0) invert(1);"> Admin</h1>
+    <div class="topbar-right">
+      <span class="pill" id="statusIndicator">●&nbsp; Loading…</span>
+      <span id="now"></span>
+    </div>
+  </header>
+
+  <!-- LOGIN GATE — shown until a valid admin key is entered -->
+  <div class="gate" id="gate">
+    <h2>Admin sign-in</h2>
+    <p>Enter your admin API key to view orders and contact messages.</p>
+    <form id="loginForm">
+      <input type="password" id="apiKey" placeholder="Admin API key" autocomplete="off" required>
+      <button type="submit">Sign in</button>
+      <p class="err" id="loginErr" style="display:none;"></p>
+    </form>
+    <p class="help">
+      Your admin key is set via the <code>ADMIN_API_KEY</code> environment variable
+      in the server's <code>.env</code> file. The dashboard stores it in
+      <code>sessionStorage</code>, so it clears when you close the tab.
+    </p>
+  </div>
+
+  <!-- DASHBOARD — hidden until signed in -->
+  <div class="container" id="dashboard" style="display:none;">
+
+    <div class="stats" id="statsRow"></div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="orders">Orders <span class="badge" id="ordersBadge" style="display:none;">0</span></button>
+      <button class="tab" data-tab="contacts">Contact messages <span class="badge" id="contactsBadge" style="display:none;">0</span></button>
+    </div>
+
+    <!-- ORDERS PANEL -->
+    <section id="panel-orders">
+      <div class="toolbar">
+        <label>Status:
+          <select id="statusFilter">
+            <option value="">All</option>
+            <option value="received">Received</option>
+            <option value="preparing">Preparing</option>
+            <option value="out_for_delivery">Out for delivery</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </label>
+        <input type="search" id="searchInput" placeholder="Search by name, email, phone, order id…">
+        <button id="refreshBtn">Refresh</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody">
+            <tr><td colspan="6" class="empty">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CONTACTS PANEL -->
+    <section id="panel-contacts" style="display:none;">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Received</th>
+              <th>From</th>
+              <th>Subject</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody id="contactsBody">
+            <tr><td colspan="4" class="empty">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

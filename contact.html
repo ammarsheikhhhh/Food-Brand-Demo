@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us | KarachiBites</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cart side panel -->
+  <div class="cart-panel-overlay" id="cartPanelOverlay"></div>
+  <aside class="cart-panel" id="cartPanel" role="dialog" aria-label="Your cart" aria-hidden="true">
+    <div class="cp-header">
+      <span class="cp-header-title">
+        <img src="assets/icon-cart.png" alt="" class="cp-header-icon">
+        Your Cart
+      </span>
+      <button type="button" class="cp-close" id="cartPanelClose" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cp-scroll" id="cartPanelScroll">
+      <div class="cp-items" id="cartPanelItems"></div>
+
+      <a href="menu.html" class="cp-add-more">
+        <span>&plus;</span> Add more items
+      </a>
+
+      <div class="cp-upsell" id="cartPanelUpsell" style="display:none;">
+        <div class="cp-upsell-header">
+          <span class="cp-upsell-bar"></span>
+          <img class="cp-upsell-fire" src="assets/icon-fire.png" alt="">
+          <span class="cp-upsell-title">Popular with your order</span>
+          <div class="cp-upsell-arrows">
+            <button type="button" class="cp-upsell-arrow prev" id="cpUpsellPrev" aria-label="Scroll left">&lsaquo;</button>
+            <button type="button" class="cp-upsell-arrow next" id="cpUpsellNext" aria-label="Scroll right">&rsaquo;</button>
+          </div>
+        </div>
+        <div class="cp-upsell-track" id="cartPanelUpsellTrack"></div>
+      </div>
+    </div>
+
+    <div class="cp-footer">
+      <div class="cp-summary" id="cartPanelSummary"></div>
+      <a href="checkout.html" class="cp-checkout-btn">
+        checkout <span>&rarr;</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Floating "added to cart" bar -->
+  <div class="cart-float-bar" id="cartFloatBar" role="button" tabindex="0" aria-label="View cart">
+    <span class="cfb-shine"></span>
+    <span class="cfb-count">0</span>
+    <span class="cfb-label">View Cart</span>
+    <span class="cfb-price">Rs. 0</span>
+    <span class="cfb-arrow">&rarr;</span>
+  </div>
+
+  <header class="navbar">
+    <div class="navbar-bunting"></div>
+    <div class="topbar-inner">
+
+      <!-- LEFT: Location selector + Contact us -->
+      <div class="navbar-left">
+        <div class="location-wrap">
+          <button class="location-btn" id="locationBtn" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/icon-location.png" alt="" class="location-icon">
+            <span class="location-text">
+              <strong>Change Location</strong>
+              <span class="location-sub">Karachi</span>
+            </span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="location-dropdown" id="locationDropdown">
+            <button class="location-option" data-location="Clifton">Clifton</button>
+            <button class="location-option" data-location="DHA Phase 5">DHA Phase 5</button>
+            <button class="location-option" data-location="Gulshan-e-Iqbal">Gulshan-e-Iqbal</button>
+            <button class="location-option" data-location="North Nazimabad">North Nazimabad</button>
+            <button class="location-option" data-location="Saddar">Saddar</button>
+          </div>
+        </div>
+
+        <span class="navbar-divider"></span>
+
+        <div class="contact-us">
+          <span class="contact-icon-wrap"><img src="assets/icon-phone.png" alt="" class="contact-icon"></span>
+          <span class="contact-text">
+            <strong>Contact us</strong>
+            <span class="contact-sub">0334-3745379</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- CENTER: Logo -->
+      <a href="index.html" class="nav-logo"><img src="assets/evora-logo.png" alt="Evora" class="nav-logo-img"></a>
+
+      <!-- RIGHT: Complaint, Cart, Options -->
+      <div class="topbar-actions">
+        <a href="contact.html" class="complaint-pill">
+          <span class="complaint-text">
+            <strong>Submit Complaint</strong>
+            <span class="complaint-sub">We'll make it right</span>
+          </span>
+          <span class="complaint-icon-wrap"><img src="assets/icon-complaint.png" alt="" class="complaint-icon"></span>
+        </a>
+
+        <span class="navbar-divider"></span>
+
+        <div class="cart-wrap">
+          <button class="icon-btn cart-btn" id="cartBtn" aria-label="View cart" aria-haspopup="dialog">
+            <img src="assets/icon-cart.png" alt="" class="icon-btn-img">
+            <span class="badge">0</span>
+          </button>
+        </div>
+
+        <div class="options-wrap">
+          <button class="icon-btn options-btn" id="optionsBtn" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/icon-menu.png" alt="" class="icon-btn-img">
+          </button>
+          <div class="options-dropdown" id="optionsDropdown">
+            <a href="index.html" class="options-link">Home</a>
+            <a href="menu.html" class="options-link">Menu</a>
+            <a href="about.html" class="options-link">About</a>
+            <a href="contact.html" class="options-link">Contact</a>
+            <a href="about.html#blog" class="options-link">Blogs</a>
+            <a href="about.html#history" class="options-link">Our History</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <section class="page-banner">
+    <span class="eyebrow-center">We're Here To Help</span>
+    <h1>Get In Touch</h1>
+    <p>Questions, feedback, or a complaint about a recent order — send us a message and we'll get back to you.</p>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="contact-grid">
+
+        <div class="form-card">
+          <h3>Send Us a Message</h3>
+          <p>Fill out the form and our team will respond within 24 hours.</p>
+
+          <form id="contactForm">
+            <div class="field">
+              <label for="cf-name">Full Name</label>
+              <input type="text" id="cf-name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="cf-email">Email Address</label>
+              <input type="email" id="cf-email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="field">
+              <label for="cf-phone">Phone Number</label>
+              <input type="tel" id="cf-phone" name="phone" placeholder="03XX-XXXXXXX">
+            </div>
+            <div class="field">
+              <label for="cf-subject">Subject</label>
+              <select id="cf-subject" name="subject">
+                <option value="general">General Inquiry</option>
+                <option value="order">Order Question</option>
+                <option value="complaint">Submit a Complaint</option>
+                <option value="feedback">Feedback</option>
+                <option value="partnership">Partnership / Franchise</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+            <div class="form-status" id="formStatus">Thanks! Your message has been received — we'll be in touch soon.</div>
+          </form>
+        </div>
+
+        <div>
+          <div class="info-card">
+            <span class="ic-icon"><img src="assets/icon-phone.png" alt=""></span>
+            <div>
+              <h4>Call Us</h4>
+              <p>0800-KARACHI &nbsp;•&nbsp; Daily, 11 AM – 2 AM</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <span class="ic-icon"><img src="assets/icon-email.png" alt=""></span>
+            <div>
+              <h4>Email Us</h4>
+              <p>hello@karachibites.demo</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <span class="ic-icon"><img src="assets/icon-location.png" alt=""></span>
+            <div>
+              <h4>Visit a Branch</h4>
+              <p>15+ locations across Clifton, DHA, Gulshan-e-Iqbal, North Nazimabad &amp; Saddar</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <span class="ic-icon"><img src="assets/icon-hours.png" alt=""></span>
+            <div>
+              <h4>Delivery Hours</h4>
+              <p>11:00 AM – 2:00 AM, seven days a week</p>
+            </div>
+          </div>
+
+          <div class="map-placeholder">
+            <img class="mp-icon" src="assets/icon-map.png" alt="">
+            <span>Map preview — drop in your Google Maps embed here</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <span class="nav-logo"><img src="assets/evora-logo.png" alt="Evora" class="footer-logo-img"></span>
+        <p class="footer-tagline">Karachi's favorite fast food, delivered fast.</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Quick Links</h4>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="menu.html" class="footer-link">Menu</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div>
+        <h4 class="footer-heading">Get In Touch</h4>
+        <p class="footer-contact-line"><img src="assets/icon-location.png" alt="">Multiple branches across Karachi</p>
+        <p class="footer-contact-line"><img src="assets/icon-phone.png" alt="">0334-3745379</p>
+        <p class="footer-contact-line"><img src="assets/icon-email.png" alt="">kododevelopers@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 KarachiBites Demo. Built by KODO.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

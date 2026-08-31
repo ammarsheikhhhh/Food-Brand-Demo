@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Menu | KarachiBites</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cart side panel -->
+  <div class="cart-panel-overlay" id="cartPanelOverlay"></div>
+  <aside class="cart-panel" id="cartPanel" role="dialog" aria-label="Your cart" aria-hidden="true">
+    <div class="cp-header">
+      <span class="cp-header-title">
+        <img src="assets/icon-cart.png" alt="" class="cp-header-icon">
+        Your Cart
+      </span>
+      <button type="button" class="cp-close" id="cartPanelClose" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cp-scroll" id="cartPanelScroll">
+      <div class="cp-items" id="cartPanelItems"></div>
+
+      <a href="menu.html" class="cp-add-more">
+        <span>&plus;</span> Add more items
+      </a>
+
+      <div class="cp-upsell" id="cartPanelUpsell" style="display:none;">
+        <div class="cp-upsell-header">
+          <span class="cp-upsell-bar"></span>
+          <img class="cp-upsell-fire" src="assets/icon-fire.png" alt="">
+          <span class="cp-upsell-title">Popular with your order</span>
+          <div class="cp-upsell-arrows">
+            <button type="button" class="cp-upsell-arrow prev" id="cpUpsellPrev" aria-label="Scroll left">&lsaquo;</button>
+            <button type="button" class="cp-upsell-arrow next" id="cpUpsellNext" aria-label="Scroll right">&rsaquo;</button>
+          </div>
+        </div>
+        <div class="cp-upsell-track" id="cartPanelUpsellTrack"></div>
+      </div>
+    </div>
+
+    <div class="cp-footer">
+      <div class="cp-summary" id="cartPanelSummary"></div>
+      <a href="checkout.html" class="cp-checkout-btn">
+        checkout <span>&rarr;</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Floating "added to cart" bar -->
+  <div class="cart-float-bar" id="cartFloatBar" role="button" tabindex="0" aria-label="View cart">
+    <span class="cfb-shine"></span>
+    <span class="cfb-count">0</span>
+    <span class="cfb-label">View Cart</span>
+    <span class="cfb-price">Rs. 0</span>
+    <span class="cfb-arrow">&rarr;</span>
+  </div>
+
+  <header class="navbar">
+    <div class="navbar-bunting"></div>
+    <div class="topbar-inner">
+
+      <!-- LEFT: Location selector + Contact us -->
+      <div class="navbar-left">
+        <div class="location-wrap">
+          <button class="location-btn" id="locationBtn" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/icon-location.png" alt="" class="location-icon">
+            <span class="location-text">
+              <strong>Change Location</strong>
+              <span class="location-sub">Karachi</span>
+            </span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="location-dropdown" id="locationDropdown">
+            <button class="location-option" data-location="Clifton">Clifton</button>
+            <button class="location-option" data-location="DHA Phase 5">DHA Phase 5</button>
+            <button class="location-option" data-location="Gulshan-e-Iqbal">Gulshan-e-Iqbal</button>
+            <button class="location-option" data-location="North Nazimabad">North Nazimabad</button>
+            <button class="location-option" data-location="Saddar">Saddar</button>
+          </div>
+        </div>
+
+        <span class="navbar-divider"></span>
+
+        <div class="contact-us">
+          <span class="contact-icon-wrap"><img src="assets/icon-phone.png" alt="" class="contact-icon"></span>
+          <span class="contact-text">
+            <strong>Contact us</strong>
+            <span class="contact-sub">0334-3745379</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- CENTER: Logo -->
+      <a href="index.html" class="nav-logo"><img src="assets/evora-logo.png" alt="Evora" class="nav-logo-img"></a>
+
+      <!-- RIGHT: Complaint, Cart, Options -->
+      <div class="topbar-actions">
+        <a href="contact.html" class="complaint-pill">
+          <span class="complaint-text">
+            <strong>Submit Complaint</strong>
+            <span class="complaint-sub">We'll make it right</span>
+          </span>
+          <span class="complaint-icon-wrap"><img src="assets/icon-complaint.png" alt="" class="complaint-icon"></span>
+        </a>
+
+        <span class="navbar-divider"></span>
+
+        <div class="cart-wrap">
+          <button class="icon-btn cart-btn" id="cartBtn" aria-label="View cart" aria-haspopup="dialog">
+            <img src="assets/icon-cart.png" alt="" class="icon-btn-img">
+            <span class="badge">0</span>
+          </button>
+        </div>
+
+        <div class="options-wrap">
+          <button class="icon-btn options-btn" id="optionsBtn" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/icon-menu.png" alt="" class="icon-btn-img">
+          </button>
+          <div class="options-dropdown" id="optionsDropdown">
+            <a href="index.html" class="options-link">Home</a>
+            <a href="menu.html" class="options-link">Menu</a>
+            <a href="about.html" class="options-link">About</a>
+            <a href="contact.html" class="options-link">Contact</a>
+            <a href="about.html#blog" class="options-link">Blogs</a>
+            <a href="about.html#history" class="options-link">Our History</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <section class="page-banner">
+    <span class="eyebrow-center">Fresh, Fast, Full Menu</span>
+    <h1>What are you craving today?</h1>
+    <p>Burgers, rolls, family deals, sides and drinks — everything made fresh to order and delivered hot across Karachi.</p>
+  </section>
+
+  <section class="menu-preview">
+    <div class="section-inner">
+
+      <form class="search-bar" id="menuSearchForm" role="search">
+  <img src="assets/search.png" alt="" class="search-icon-img">
+  <input type="text" id="menuSearchInput" class="search-input" placeholder="Search for Zinger Loaded Burger..." aria-label="Search menu items" autocomplete="off">
+  <button type="submit" class="search-submit-btn" aria-label="Search">
+    <img src="assets/arrow.png" alt="" class="search-arrow-img">
+  </button>
+</form>
+
+
+      <div class="menu-tabs" id="menuTabs">
+        <button class="menu-tab active" data-filter="all">All</button>
+        <button class="menu-tab" data-filter="burgers">Burgers</button>
+        <button class="menu-tab" data-filter="rolls">Rolls</button>
+        <button class="menu-tab" data-filter="family">Family Deals</button>
+        <button class="menu-tab" data-filter="sides">Sides &amp; Drinks</button>
+      </div>
+
+      <div class="menu-full-grid" id="menuGrid">
+
+        <div class="menu-card" data-category="burgers">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-burger.png" alt="Zinger Loaded Burger"></div>
+          <h3 class="menu-title">Zinger Loaded Burger</h3>
+          <p class="menu-desc">Crispy fried chicken, cheese, signature sauce</p>
+          <div class="row"><span class="price">Rs. 650</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="burgers">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-cheese-burger.png" alt="Double Cheese Beef Burger"></div>
+          <h3 class="menu-title">Double Cheese Beef Burger</h3>
+          <p class="menu-desc">Two beef patties, double cheddar, house sauce</p>
+          <div class="row"><span class="price">Rs. 780</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="burgers">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-spicy-burger.png" alt="Spicy Peri Peri Burger"></div>
+          <h3 class="menu-title">Spicy Peri Peri Burger</h3>
+          <p class="menu-desc">Flame-grilled chicken, peri peri mayo, slaw</p>
+          <div class="row"><span class="price">Rs. 620</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="burgers">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-classic-burger.png" alt="Classic Chicken Burger"></div>
+          <h3 class="menu-title">Classic Chicken Burger</h3>
+          <p class="menu-desc">Grilled chicken breast, lettuce, tomato, mayo</p>
+          <div class="row"><span class="price">Rs. 480</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="rolls">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-roll.png" alt="Signature Beef Roll"></div>
+          <h3 class="menu-title">Signature Beef Roll</h3>
+          <p class="menu-desc">Slow-cooked beef, mint chutney, paratha wrap</p>
+          <div class="row"><span class="price">Rs. 420</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="rolls">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-malai-roll.png" alt="Malai Boti Roll"></div>
+          <h3 class="menu-title">Malai Boti Roll</h3>
+          <p class="menu-desc">Creamy chicken tikka, mint yogurt, paratha</p>
+          <div class="row"><span class="price">Rs. 380</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="rolls">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-seekh-roll.png" alt="Seekh Kebab Roll"></div>
+          <h3 class="menu-title">Seekh Kebab Roll</h3>
+          <p class="menu-desc">Char-grilled seekh kebab, chutney, onions</p>
+          <div class="row"><span class="price">Rs. 400</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="family">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-family-feast.png" alt="Family Feast Combo"></div>
+          <h3 class="menu-title">Family Feast Combo</h3>
+          <p class="menu-desc">4 burgers, 2 fries, 1.5L drink</p>
+          <div class="row"><span class="price">Rs. 1,799</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="family">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-bbq.png" alt="BBQ Platter"></div>
+          <h3 class="menu-title">BBQ Platter</h3>
+          <p class="menu-desc">Char-grilled seekh &amp; boti with naan, serves 4</p>
+          <div class="row"><span class="price">Rs. 1,950</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="family">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-pizza-bundle.png" alt="Pizza & Rolls Bundle"></div>
+          <h3 class="menu-title">Pizza &amp; Rolls Bundle</h3>
+          <p class="menu-desc">1 large pizza + 2 rolls + 1L drink</p>
+          <div class="row"><span class="price">Rs. 1,650</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="sides">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-fries.png" alt="Loaded Cheese Fries"></div>
+          <h3 class="menu-title">Loaded Cheese Fries</h3>
+          <p class="menu-desc">Crinkle-cut fries, cheddar drizzle, jalapeños</p>
+          <div class="row"><span class="price">Rs. 320</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="sides">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-drink.png" alt="Chilled Soft Drink 1.5L"></div>
+          <h3 class="menu-title">Chilled Soft Drink 1.5L</h3>
+          <p class="menu-desc">Choice of cola, lemon-lime, or orange</p>
+          <div class="row"><span class="price">Rs. 220</span><button class="add-btn">Add +</button></div>
+        </div>
+
+        <div class="menu-card" data-category="sides">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-salad.png" alt="Garden Fresh Salad"></div>
+          <h3 class="menu-title">Garden Fresh Salad</h3>
+          <p class="menu-desc">Crisp lettuce, cucumber, tomato, house dressing</p>
+          <div class="row"><span class="price">Rs. 280</span><button class="add-btn">Add +</button></div>
+        </div>
+
+      </div>
+
+      <p class="menu-no-results" id="menuNoResults">No items match your search — try a different keyword.</p>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <span class="nav-logo"><img src="assets/evora-logo.png" alt="Evora" class="footer-logo-img"></span>
+        <p class="footer-tagline">Karachi's favorite fast food, delivered fast.</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Quick Links</h4>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="menu.html" class="footer-link">Menu</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div>
+       <h4 class="footer-heading">Get In Touch</h4>
+        <p class="footer-contact-line"><img src="assets/icon-location.png" alt="">Multiple branches across Karachi</p>
+        <p class="footer-contact-line"><img src="assets/icon-phone.png" alt="">0334-3745379</p>
+        <p class="footer-contact-line"><img src="assets/icon-email.png" alt="">kododevelopers@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 KarachiBites Demo. Built by KODO.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

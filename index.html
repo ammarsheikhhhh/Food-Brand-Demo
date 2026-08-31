@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KarachiBites | Karachi's Favorite Fast Food</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+  .deals-slider {
+    padding: 24px 0;
+  }
+
+  .deals-slider-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .deals-track-wrap {
+    position: relative;
+  }
+
+  .deals-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 8px 40px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .deals-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .deals-side-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: #e4002b;
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background 0.2s ease;
+    font-family: inherit;
+    padding: 0;
+  }
+
+  .deals-side-arrow:hover {
+    background: #b80022;
+  }
+
+  .deals-arrow-left {
+    left: 4px;
+  }
+
+  .deals-arrow-right {
+    right: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .deals-side-arrow {
+      display: none;
+    }
+    .deals-track {
+      padding: 8px 16px;
+    }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- Cart side panel -->
+  <div class="cart-panel-overlay" id="cartPanelOverlay"></div>
+  <aside class="cart-panel" id="cartPanel" role="dialog" aria-label="Your cart" aria-hidden="true">
+    <div class="cp-header">
+      <span class="cp-header-title">
+        <img src="assets/cart-icon.png" alt="" class="cp-header-icon">
+        Your Cart
+      </span>
+      <button type="button" class="cp-close" id="cartPanelClose" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cp-scroll" id="cartPanelScroll">
+      <div class="cp-items" id="cartPanelItems"></div>
+
+      <a href="menu.html" class="cp-add-more">
+        <span>&plus;</span> Add more items
+      </a>
+
+      <div class="cp-upsell" id="cartPanelUpsell" style="display:none;">
+        <div class="cp-upsell-header">
+          <span class="cp-upsell-bar"></span>
+          <img class="cp-upsell-fire" src="assets/icon-fire.png" alt="">
+          <span class="cp-upsell-title">Popular with your order</span>
+          <div class="cp-upsell-arrows">
+            <button type="button" class="cp-upsell-arrow prev" id="cpUpsellPrev" aria-label="Scroll left">&lsaquo;</button>
+            <button type="button" class="cp-upsell-arrow next" id="cpUpsellNext" aria-label="Scroll right">&rsaquo;</button>
+          </div>
+        </div>
+        <div class="cp-upsell-track" id="cartPanelUpsellTrack"></div>
+      </div>
+    </div>
+
+    <div class="cp-footer">
+      <div class="cp-summary" id="cartPanelSummary"></div>
+      <a href="checkout.html" class="cp-checkout-btn">
+        checkout <span>&rarr;</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Floating "added to cart" bar -->
+  <div class="cart-float-bar" id="cartFloatBar" role="button" tabindex="0" aria-label="View cart">
+    <span class="cfb-shine"></span>
+    <span class="cfb-count">0</span>
+    <span class="cfb-label">View Cart</span>
+    <span class="cfb-price">Rs. 0</span>
+    <span class="cfb-arrow">&rarr;</span>
+  </div>
+
+  <header class="navbar">
+    <div class="navbar-bunting"></div>
+    <div class="topbar-inner">
+
+      <!-- LEFT: Location selector + Contact us -->
+      <div class="navbar-left">
+        <div class="location-wrap">
+          <button class="location-btn" id="locationBtn" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/location-filled.png" alt="" class="location-icon">
+            <span class="location-text">
+              <strong>Change Location</strong>
+              <span class="location-sub">Karachi</span>
+            </span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="location-dropdown" id="locationDropdown">
+            <button class="location-option" data-location="Clifton">Clifton</button>
+            <button class="location-option" data-location="DHA Phase 5">DHA Phase 5</button>
+            <button class="location-option" data-location="Gulshan-e-Iqbal">Gulshan-e-Iqbal</button>
+            <button class="location-option" data-location="North Nazimabad">North Nazimabad</button>
+            <button class="location-option" data-location="Saddar">Saddar</button>
+          </div>
+        </div>
+
+        <span class="navbar-divider"></span>
+
+        <div class="contact-us">
+          <span class="contact-icon-wrap"><img src="assets/Phone.png" alt="" class="contact-icon"></span>
+          <span class="contact-text">
+            <strong>Contact us</strong>
+            <span class="contact-sub">0334-3745379</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- CENTER: Logo -->
+      <a href="index.html" class="nav-logo"><img src="assets/evora-logo.png" alt="Evora" class="nav-logo-img"></a>
+
+      <!-- RIGHT: Complaint, Cart, Options -->
+      <div class="topbar-actions">
+        <a href="contact.html" class="complaint-pill">
+          <span class="complaint-text">
+            <strong>Submit Complaint</strong>
+            <span class="complaint-sub">We'll make it right</span>
+          </span>
+          <span class="complaint-icon-wrap"><img src="assets/complaint.png" alt="" class="complaint-icon"></span>
+        </a>
+
+        <span class="navbar-divider"></span>
+
+        <div class="cart-wrap">
+          <button class="icon-btn cart-btn" id="cartBtn" aria-label="View cart" aria-haspopup="dialog">
+            <img src="assets/cart-icon.png" alt="" class="icon-btn-img">
+            <span class="badge">0</span>
+          </button>
+        </div>
+
+        <div class="options-wrap">
+          <button class="icon-btn options-btn" id="optionsBtn" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/icon-menu.png" alt="" class="icon-btn-img">
+          </button>
+          <div class="options-dropdown" id="optionsDropdown">
+            <a href="index.html" class="options-link">Home</a>
+            <a href="menu.html" class="options-link">Menu</a>
+            <a href="about.html" class="options-link">About</a>
+            <a href="contact.html" class="options-link">Contact</a>
+            <a href="about.html#blog" class="options-link">Blogs</a>
+            <a href="about.html#history" class="options-link">Our History</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero: auto-rotating deal banner carousel -->
+  <section class="deal-carousel">
+    <div class="deal-carousel-inner">
+
+      <div class="carousel" id="dealCarousel" role="region" aria-roledescription="carousel" aria-label="Today's deals">
+        <div class="carousel-track" id="carouselTrack">
+
+          <div class="carousel-slide active" data-slide="0">
+            <img class="cs-img" src="assets/d1.png" alt="Zinger Loaded Combo deal">
+          </div>
+          <div class="carousel-slide" data-slide="1">
+            <img class="cs-img" src="assets/deal-2.svg" alt="Midnight Munchies deal">
+          </div>
+
+          <div class="carousel-slide" data-slide="2">
+            <img class="cs-img" src="assets/deal-3.svg" alt="Family Feast deal">
+          </div>
+
+          <div class="carousel-slide" data-slide="3">
+            <img class="cs-img" src="assets/deal-4.svg" alt="Roll combo deal">
+          </div>
+
+        </div>
+
+        <button class="carousel-arrow prev" id="carouselPrev" aria-label="Previous deal">‹</button>
+        <button class="carousel-arrow next" id="carouselNext" aria-label="Next deal">›</button>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search bar -->
+  <section class="search-bar-section">
+    <form class="search-bar" id="menuSearchForm" role="search">
+  <img src="assets/search.png" alt="" class="search-icon-img">
+  <input type="text" id="menuSearchInput" class="search-input" placeholder="Search for Zinger Loaded Burger..." aria-label="Search menu items" autocomplete="off">
+  <button type="submit" class="search-submit-btn" aria-label="Search">
+    <img src="assets/arrow.png" alt="" class="search-arrow-img">
+  </button>
+</form>
+  </section>
+
+  <!-- Sliding deals / category bar -->
+  <section class="deals-slider">
+    <div class="deals-slider-inner">
+      <div class="deals-track-wrap">
+        <button class="arrow-btn deals-side-arrow deals-arrow-left" id="dealsPrev" aria-label="Scroll left">‹</button>
+        <div class="deals-track" id="dealsTrack">
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/BEVERAGES.png" alt="">
+            <span>Beverages</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Burger-Deals.png" alt="">
+            <span>Burger Deals</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="asset/chickybites.png" alt="">
+            <span>Chicky Bites</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Exclusive-Deals.png" alt="">
+            <span>Exclusive Deals</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Exclusive-FamilyDeals.png" alt="">
+            <span>Exclusive Family Deals</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Ice-cream-shakes.png" alt="">
+            <span>Ice Cream Shakes</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Korean-Range.png" alt="">
+            <span>Korean Range</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Lacha-ParathaBurger.png" alt="">
+            <span>Laccha Paratha Burger</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Meal-Deals.png" alt="">
+            <span>Meal Deals</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/New-Arrival.png" alt="">
+            <span>New Arrival</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Premium-Burgers.png" alt="">
+            <span>Premium Burgers</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Signature-RollRange.png" alt="">
+            <span>Signature Roll Range</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Snacks.png" alt="">
+            <span>Snacks</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Somthing-sweet.png" alt="">
+            <span>Something Sweet</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Summer-Deals.png" alt="">
+            <span>Summer Deals</span>
+          </a>
+          <a href="#" class="deal-pill">
+            <img class="deal-icon" src="assets/Wing-it.png" alt="">
+            <span>Wing It</span>
+          </a>
+        </div>
+        <button class="arrow-btn deals-side-arrow deals-arrow-right" id="dealsNext" aria-label="Scroll right">›</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-preview">
+    <div class="section-inner">
+      <span class="eyebrow-center">Crowd Favorites</span>
+      <h2 class="section-title">Our Best Sellers</h2>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-burger.png" alt="Zinger Loaded Burger"></div>
+          <h3 class="menu-title">Zinger Loaded Burger</h3>
+          <p class="menu-desc">Crispy fried chicken, cheese, signature sauce</p>
+          <span class="price">Rs. 650</span>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-bbq.png" alt="BBQ Platter"></div>
+          <h3 class="menu-title">BBQ Platter</h3>
+          <p class="menu-desc">Char-grilled seekh &amp; boti with naan</p>
+          <span class="price">Rs. 950</span>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-roll.png" alt="Signature Beef Roll"></div>
+          <h3 class="menu-title">Signature Beef Roll</h3>
+          <p class="menu-desc">Slow-cooked beef, mint chutney, paratha wrap</p>
+          <span class="price">Rs. 420</span>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img"><img class="menu-emoji" src="assets/food-pizza.png" alt="Loaded Pizza Slice"></div>
+          <h3 class="menu-title">Loaded Pizza Slice</h3>
+          <p class="menu-desc">Triple cheese, spicy beef pepperoni</p>
+          <span class="price">Rs. 380</span>
+        </div>
+      </div>
+      <a href="menu.html" class="btn btn-primary center-btn">See Full Menu</a>
+    </div>
+  </section>
+
+  <section class="deals-banner">
+    <div class="deals-inner">
+      <div>
+        <span class="eyebrow-light">Limited Time</span>
+        <h2 class="deals-title">Family Combo Deal</h2>
+        <p class="deals-desc">4 Burgers + 2 Fries + 1.5L Drink — feed the whole family for less.</p>
+      </div>
+      <div class="deals-price">
+        <span class="old-price">Rs. 2,400</span>
+        <span class="new-price">Rs. 1,799</span>
+        <a href="contact.html" class="btn btn-light">Order This Deal</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner about-grid">
+      <div class="about-visual">
+        <img class="about-emoji" src="assets/icon-chef.png" alt="Chef">
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow">Our Story</span>
+        <h2 class="section-title">Made Fresh, Served Fast</h2>
+        <p class="about-desc">Since day one, we've been grilling, frying, and rolling up Karachi's favorite street food classics with a modern twist — using fresh ingredients and recipes perfected over the years.</p>
+        <a href="about.html" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <span class="nav-logo"><img src="assets/evora-logo.png" alt="Evora" class="footer-logo-img"></span>
+        <p class="footer-tagline">Karachi's favorite fast food, delivered fast.</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Quick Links</h4>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="menu.html" class="footer-link">Menu</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div>
+        <h4 class="footer-heading">Get In Touch</h4>
+        <p class="footer-contact-line"><img src="assets/icon-location.png" alt="">Multiple branches across Karachi</p>
+        <p class="footer-contact-line"><img src="assets/icon-phone.png" alt="">0334-3745379</p>
+        <p class="footer-contact-line"><img src="assets/icon-email.png" alt="">kododevelopers@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 KarachiBites Demo. Built by KODO.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
